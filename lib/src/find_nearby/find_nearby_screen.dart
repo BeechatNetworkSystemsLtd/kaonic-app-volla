@@ -42,7 +42,7 @@ class FindNearbyScreen extends StatelessWidget {
                   Text(
                     S.of(context).labelUsersNearby,
                     textAlign: TextAlign.center,
-                    style: TextStyles.text24.copyWith(color: Colors.white),
+                    style: TextStyles.appbarTitle,
                   ),
                 ],
               ),
@@ -50,8 +50,7 @@ class FindNearbyScreen extends StatelessWidget {
               Expanded(
                 child: BlocConsumer<FindNearbyBloc, FindNearbyState>(
                   listener: (context, state) {
-                    if (state is SuccessfullyAddedContact) {
-                    }
+                    if (state is SuccessfullyAddedContact) {}
                   },
                   builder: (context, state) {
                     return AnimatedSwitcher(

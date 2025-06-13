@@ -31,8 +31,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   late final ChatService _chatService;
   late final CallService _callService;
   final String _address;
-  StreamSubscription<List<KaonicEvent<KaonicEventData>>>?
-      _chatSubscription;
+  StreamSubscription<List<KaonicEvent<KaonicEventData>>>? _chatSubscription;
 
   @override
   Future<void> close() async {
@@ -42,8 +41,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   }
 
   FutureOr<void> _intiChat(_IntiChat event, Emitter<ChatState> emit) async {
-    final chatId = await _chatService.createChat(_address);
     _chatService.onChatIDUpdated = _onChatIdChanged;
+    final chatId = await _chatService.createChat(_address);
     _chatSubscription = _chatService.getChatMessages(chatId).listen((messages) {
       add(_UpdatedChats(messages: messages));
     });

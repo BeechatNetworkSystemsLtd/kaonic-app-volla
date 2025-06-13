@@ -36,37 +36,46 @@ class HomeScreen extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Row(
+                Stack(
                   children: [
-                    Image.asset(
-                      Assets.favicon,
-                      width: 44.w,
-                      height: 44.w,
-                    ),
-                    Expanded(
-                      child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.w),
-                          child: Align(
-                            child: Text(
-                              S.of(context).labelContactList,
-                              textAlign: TextAlign.center,
-                              style: TextStyles.text24
-                                  .copyWith(color: Colors.white),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Image.asset(
+                          Assets.favicon,
+                          width: 44.w,
+                          height: 44.w,
+                        ),
+                        Row(
+                          children: [
+                            CircleButton(
+                                icon: Assets.iconAdd,
+                                onTap: () {
+                                  Navigator.of(context)
+                                      .pushNamed(Routes.findNearby);
+                                }),
+                            SizedBox(width: 10.w),
+                            CircleButton(
+                              icon: Assets.iconSettings,
+                              onTap: () {
+                                Navigator.of(context)
+                                    .pushNamed(Routes.settings);
+                              },
                             ),
-                          )),
+                          ],
+                        ),
+                      ],
                     ),
-                    CircleButton(
-                        icon: Assets.iconAdd,
-                        onTap: () {
-                          Navigator.of(context).pushNamed(Routes.findNearby);
-                        }),
-                    SizedBox(width: 10.w),
-                    CircleButton(
-                      icon: Assets.iconSettings,
-                      onTap: () {
-                        Navigator.of(context).pushNamed(Routes.settings);
-                      },
-                    ),
+                    Align(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Text(
+                          'Contacts',
+                          textAlign: TextAlign.center,
+                          style: TextStyles.appbarTitle,
+                        ),
+                      ),
+                    )
                   ],
                 ),
                 SizedBox(height: 20.h),

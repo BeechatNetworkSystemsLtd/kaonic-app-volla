@@ -9,7 +9,7 @@ class UserIconWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      backgroundColor: AppColors.red,
+      backgroundColor: AppColors.white,
       child: Icon(
         Icons.person,
         color: AppColors.dark,

@@ -77,7 +77,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         ? widget.address.substring(0, 15)
                         : widget.address,
                     textAlign: TextAlign.center,
-                    style: TextStyles.text24.copyWith(color: Colors.white),
+                    style: TextStyles.appbarTitle,
                   ),
                   Align(
                       alignment: Alignment.centerRight,

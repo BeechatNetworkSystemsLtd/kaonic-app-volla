@@ -15,6 +15,8 @@ abstract class TextStyles {
   /// 18
   static const text18 = TextStyle(fontSize: 18, color: AppColors.black);
   static final text18Bold = text18.copyWith(fontWeight: FontWeight.bold);
+  static final appbarTitle =
+      text18.copyWith(color: Colors.white, fontWeight: FontWeight.w600);
 
   /// 16
   static const text16 = TextStyle(fontSize: 16, color: AppColors.black);

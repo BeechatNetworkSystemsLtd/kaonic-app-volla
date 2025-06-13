@@ -59,11 +59,7 @@ class ChatService {
 
   Future<String> createChat(String address) async {
     final chatId = await _kaonicService.createChat(address);
-
-    _contactChats[address] = chatId;
-
-    final messages = _messageRepository.getMessages();
-    _messagesSubject.add(messages);
+    _putOrUpdateChatId(chatId, address, needOnChaUpdated: false);
 
     return chatId;
   }
@@ -108,11 +104,22 @@ class ChatService {
     _messageRepository.saveMessages(currentMap);
   }
 
-  void _putOrUpdateChatId(String chatId, String address) {
-    final containsAddressWithChatID = _contactChats.containsKey(address);
+  void _putOrUpdateChatId(String chatId, String address,
+      {bool needOnChaUpdated = true}) {
+    final prevChatId = _contactChats[address];
     _contactChats[address] = chatId;
-    if (containsAddressWithChatID) {
-      onChatIDUpdated?.call(address, chatId);
+    if (prevChatId != null) {
+      final currentMap = Map<String, List<KaonicEvent>>.from(
+          _messagesSubject.valueOrNull ?? {});
+
+      final messages = currentMap[prevChatId] ?? [];
+      currentMap.remove(prevChatId);
+      currentMap[chatId] = messages;
+      _messageRepository.saveMessages(currentMap);
+      _messagesSubject.add(currentMap);
+      if (needOnChaUpdated) {
+        onChatIDUpdated?.call(address, chatId);
+      }
     }
   }
 }

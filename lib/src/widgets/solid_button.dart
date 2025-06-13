@@ -43,6 +43,11 @@ class SolidButton extends StatelessWidget {
             padding ?? EdgeInsets.symmetric(vertical: 16),
           ),
           splashFactory: InkRipple.splashFactory,
+          textStyle: WidgetStatePropertyAll(TextStyles.text18.copyWith(
+            height: 1,
+            fontWeight: FontWeight.w600,
+            color: textColor,
+          )),
           overlayColor: WidgetStatePropertyAll(
             splashColor ?? AppColors.white.withValues(alpha: 0.25),
           ),
@@ -72,10 +77,6 @@ class SolidButton extends StatelessWidget {
               Image.asset(icon!),
             Text(
               textButton,
-              style: TextStyles.text18.copyWith(
-                height: 1,
-                color: textColor,
-              ),
             ),
           ],
         ),

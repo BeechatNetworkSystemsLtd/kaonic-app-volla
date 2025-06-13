@@ -29,29 +29,6 @@ class ContactItem extends StatelessWidget {
       child: Row(
         children: [
           UserIconWidget(),
-// TODO delete?
-          // Flexible(
-          //   flex: 2,
-          //   child: DecoratedBox(
-          //     decoration: BoxDecoration(
-          //         // gradient: AppColors.yellowGradient,
-          //         color: AppColors.white,
-          //         borderRadius: BorderRadius.circular(42)),
-          //     child: SizedBox(
-          //       height: 32,
-          //       child: Align(
-          //         child: Padding(
-          //           padding: EdgeInsets.symmetric(horizontal: 10.w),
-          //           child: Text(
-          //             'User',
-          //             style: TextStyles.text18Bold,
-          //             overflow: TextOverflow.ellipsis,
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
           SizedBox(width: 10.w),
           Flexible(
             flex: 5,
@@ -72,27 +49,6 @@ class ContactItem extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    // if (onIdentifyTap != null)
-                    //   Padding(
-                    //     padding: EdgeInsets.only(left: 5.w),
-                    //     child: InkWell(
-                    //       borderRadius: BorderRadius.circular(48),
-                    //       onTap: onIdentifyTap,
-                    //       child: Ink(
-                    //         decoration: BoxDecoration(
-                    //             borderRadius: BorderRadius.circular(48),
-                    //             color: AppColors.grey2),
-                    //         padding: EdgeInsets.symmetric(horizontal: 10.w),
-                    //         child: Text(
-                    //           S.of(context).labelIdentify,
-                    //           style: TextStyles.text14
-                    //               .copyWith(color: AppColors.grey5),
-                    //           maxLines: 1,
-                    //           overflow: TextOverflow.ellipsis,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
                     Padding(
                       padding: EdgeInsets.only(left: 10.w),
                       child: DecoratedBox(
@@ -101,7 +57,7 @@ class ContactItem extends StatelessWidget {
                           color: nearbyFound ? AppColors.negative : null,
                           border: nearbyFound
                               ? null
-                              : Border.all(color: AppColors.yellow),
+                              : Border.all(color: AppColors.white),
                         ),
                         child: const SizedBox(width: 8, height: 8),
                       ),
