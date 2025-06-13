@@ -3,12 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kaonic/data/models/settings.dart';
 import 'package:kaonic/generated/l10n.dart';
+import 'package:kaonic/routes.dart';
 import 'package:kaonic/service/kaonic_communication_service.dart';
 import 'package:kaonic/src/settings/bloc/settings_bloc.dart';
 import 'package:kaonic/src/widgets/custom_appbar.dart';
 import 'package:kaonic/src/widgets/main_button.dart';
 import 'package:kaonic/src/widgets/main_text_field.dart';
 import 'package:kaonic/src/widgets/radio_button.dart';
+import 'package:kaonic/src/widgets/solid_button.dart';
 import 'package:kaonic/theme/text_styles.dart';
 import 'package:kaonic/theme/theme.dart';
 
@@ -32,6 +34,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return BlocProvider(
       create: (context) => SettingsBloc(communicationService: context.read()),
       child: Scaffold(
+        backgroundColor: AppColors.dark,
         body: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 16,
@@ -46,6 +49,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     children: [
                       // _appBar(),
                       CustomAppbar(title: S.of(context).settings),
+                      SizedBox(height: 16),
+                      Divider(color: Colors.white38),
+                      InkWell(
+                        onTap: () =>
+                            Navigator.of(ctxBloc).pushNamed(Routes.ota),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Software Update',
+                                style: TextStyles.text18Bold
+                                    .copyWith(color: Colors.white),
+                              ),
+                              Icon(
+                                Icons.keyboard_arrow_right,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Divider(color: Colors.white38),
                       SizedBox(height: 16),
                       Align(
                         child: Text(
@@ -192,10 +219,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       Padding(
                         padding: EdgeInsets.only(top: 32.h, bottom: 32.h),
                         child: Align(
-                            child: MainButton(
-                          label: S.current.save,
-                          onPressed: () =>
+                            child: SolidButton(
+                          margin: EdgeInsets.symmetric(horizontal: 32.w),
+                          padding: EdgeInsets.symmetric(vertical: 14.h),
+                          onTap: () =>
                               ctxBloc.read<SettingsBloc>().add(SaveSettings()),
+                          textButton: S.current.save,
                         )),
                       )
                     ],
@@ -242,22 +271,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ],
       );
 
-  // Widget _appBar() => Row(
-  //       children: [
-  //         BackButton(
-  //           color: Colors.white,
-  //         ),
-  //         Expanded(
-  //           child: Padding(
-  //               padding: EdgeInsets.symmetric(horizontal: 10.w),
-  //               child: Align(
-  //                 child: Text(
-  //                   S.of(context).settings,
-  //                   textAlign: TextAlign.center,
-  //                   style: TextStyles.text24.copyWith(color: Colors.white),
-  //                 ),
-  //               )),
-  //         ),
-  //       ],
-  //     );
+  Widget _appBar() => Row(
+        children: [
+          Flexible(
+            child: BackButton(
+              color: Colors.white,
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
+                child: Align(
+                  child: Text(
+                    S.of(context).settings,
+                    textAlign: TextAlign.center,
+                    style: TextStyles.text24.copyWith(color: Colors.white),
+                  ),
+                )),
+          ),
+        ],
+      );
 }

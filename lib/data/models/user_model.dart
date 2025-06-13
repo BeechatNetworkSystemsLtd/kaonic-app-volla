@@ -6,10 +6,10 @@ import '../../objectbox.g.dart';
 @Entity()
 class UserModel {
   UserModel({
+    required this.id,
     required this.username,
     required this.passcode,
     this.key = '',
-    required this.id,
     this.logged = false,
   });
   @Id()

@@ -1,6 +1,7 @@
 import 'package:kaonic/generated/l10n.dart';
 import 'package:kaonic/routes.dart';
 import 'package:kaonic/service/call_service.dart';
+import 'package:kaonic/service/ota_service.dart';
 import 'package:kaonic/service/user_service.dart';
 import 'package:kaonic/src/home/bloc/home_bloc.dart';
 import 'package:kaonic/src/home/widgets/contact_item.dart';
@@ -12,8 +13,21 @@ import 'package:kaonic/theme/assets.dart';
 import 'package:kaonic/theme/text_styles.dart';
 import 'package:kaonic/theme/theme.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    //check and upload last FW version
+    context.read<OtaService>().checkRemoteLatestVersion();
+    context.read<OtaService>().updateKaonicFWVersion();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
