@@ -4,6 +4,7 @@ import 'package:kaonic/data/models/kaonic_create_chat_event.dart';
 import 'package:kaonic/data/models/kaonic_event.dart';
 import 'package:kaonic/data/models/kaonic_event_type.dart';
 import 'package:kaonic/data/models/kaonic_message_event.dart';
+import 'package:kaonic/data/repository/messages_repository.dart';
 import 'package:kaonic/service/kaonic_communication_service.dart';
 import 'package:rxdart/subjects.dart';
 
@@ -11,12 +12,17 @@ import 'package:rxdart/subjects.dart';
 typedef OnChatIdChanged = Function(String, String);
 
 class ChatService {
-  ChatService(KaonicCommunicationService kaonicService) {
+  ChatService(
+    KaonicCommunicationService kaonicService,
+    MessagesRepository messageRepository,
+  ) {
     _kaonicService = kaonicService;
+    _messageRepository = messageRepository;
     _listenMessages();
   }
 
   late final KaonicCommunicationService _kaonicService;
+  late final MessagesRepository _messageRepository;
 
   /// key is address of chat id
   final _messagesSubject =
@@ -55,6 +61,10 @@ class ChatService {
     final chatId = await _kaonicService.createChat(address);
 
     _contactChats[address] = chatId;
+
+    final messages = _messageRepository.getMessages();
+    _messagesSubject.add(messages);
+
     return chatId;
   }
 
@@ -94,6 +104,8 @@ class ChatService {
     currentMap[data.chatId] = messageList;
 
     _messagesSubject.add(currentMap);
+
+    _messageRepository.saveMessages(currentMap);
   }
 
   void _putOrUpdateChatId(String chatId, String address) {
