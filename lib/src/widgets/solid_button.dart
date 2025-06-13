@@ -16,9 +16,11 @@ class SolidButton extends StatelessWidget {
   final Color? iconColor;
   final EdgeInsets margin;
   final EdgeInsets? padding;
+  final TextStyle? textStyle; 
 
   const SolidButton({
     super.key,
+    required this.textButton,
     this.icon,
     this.onTap,
     this.padding,
@@ -27,10 +29,10 @@ class SolidButton extends StatelessWidget {
     this.defaultIcon,
     this.enabled = true,
     this.borderRadius = 32,
-    required this.textButton,
     this.margin = EdgeInsets.zero,
     this.color = AppColors.white,
     this.textColor = AppColors.black,
+    this.textStyle,
   });
 
   @override
@@ -72,10 +74,11 @@ class SolidButton extends StatelessWidget {
               Image.asset(icon!),
             Text(
               textButton,
-              style: TextStyles.text18.copyWith(
-                height: 1,
-                color: textColor,
-              ),
+              style: textStyle ??
+                  TextStyles.text18.copyWith(
+                    height: 1,
+                    color: textColor,
+                  ) 
             ),
           ],
         ),
