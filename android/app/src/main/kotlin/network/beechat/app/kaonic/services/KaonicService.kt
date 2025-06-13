@@ -52,18 +52,19 @@ object KaonicService : KaonicEventListener {
         kaonicCommunicationHandler.setEventListener(this)
         _myAddress = kaonicCommunicationHandler.myAddress
 
-        kaonicCommunicationHandler.start(
+        Log.i("______","KAONIC STARTED")
+        val start = kaonicCommunicationHandler.start(
             loadSecret(),
             ConnectionConfig(
                 ConnectionContact("Kaonic"), arrayListOf(
                     Connection(
                         ConnectionType
-                            .TcpClient, ConnectionInfo("192.168.0.212:4242")
+                            .KaonicClient, ConnectionInfo("http://192.168.10.1:8080")
                     )
                 )
             )
         )
-        print("")
+        Log.i("______","KAONIC STARTED $start")
     }
 
     fun createChat(address: String, chatId: String) {
@@ -124,9 +125,12 @@ object KaonicService : KaonicEventListener {
         try {
             val SECRET_TAG = "KAONIC_SECRET"
             secret = secureStorageHelper.getSecured(SECRET_TAG)
-            if (secret == null) {
+            Log.i("SECRET","getSecret "+secret)
+            if (secret.isNullOrEmpty()) {
                 val messengerCreds = kaonicCommunicationHandler.generateSecret()
+                Log.i("SECRET","generateSecret "+messengerCreds)
                 secret = messengerCreds?.secret ?: ""
+                Log.i("SECRET","generateSecret "+secret)
                 secureStorageHelper.putSecured(SECRET_TAG, secret)
             }
         } catch (e: Exception) {
