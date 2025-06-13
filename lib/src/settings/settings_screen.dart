@@ -5,9 +5,9 @@ import 'package:kaonic/data/models/settings.dart';
 import 'package:kaonic/generated/l10n.dart';
 import 'package:kaonic/service/kaonic_communication_service.dart';
 import 'package:kaonic/src/settings/bloc/settings_bloc.dart';
-import 'package:kaonic/src/widgets/main_button.dart';
 import 'package:kaonic/src/widgets/main_text_field.dart';
 import 'package:kaonic/src/widgets/radio_button.dart';
+import 'package:kaonic/src/widgets/solid_button.dart';
 import 'package:kaonic/theme/text_styles.dart';
 import 'package:kaonic/theme/theme.dart';
 
@@ -21,8 +21,8 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   final _frequencyController =
       TextEditingController(text: KaonicCommunicationService.defaultFrequency);
-  final _spacingController =
-      TextEditingController(text: KaonicCommunicationService.defaultChannelSpacing);
+  final _spacingController = TextEditingController(
+      text: KaonicCommunicationService.defaultChannelSpacing);
   final _txPowerController =
       TextEditingController(text: KaonicCommunicationService.defaultTxPower);
 
@@ -31,6 +31,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return BlocProvider(
       create: (context) => SettingsBloc(communicationService: context.read()),
       child: Scaffold(
+        backgroundColor: AppColors.dark,
         body: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 16,
@@ -190,10 +191,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       Padding(
                         padding: EdgeInsets.only(top: 32.h, bottom: 32.h),
                         child: Align(
-                            child: MainButton(
-                          label: S.current.save,
-                          onPressed: () =>
+                            child: SolidButton(
+                          margin: EdgeInsets.symmetric(horizontal: 32.w),
+                          padding: EdgeInsets.symmetric(vertical: 14.h),
+                          onTap: () =>
                               ctxBloc.read<SettingsBloc>().add(SaveSettings()),
+                          textButton: S.current.save,
                         )),
                       )
                     ],
@@ -242,10 +245,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget _appBar() => Row(
         children: [
-          BackButton(
-            color: Colors.white,
+          Flexible(
+            child: BackButton(
+              color: Colors.white,
+            ),
           ),
           Expanded(
+            flex: 3,
             child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10.w),
                 child: Align(
