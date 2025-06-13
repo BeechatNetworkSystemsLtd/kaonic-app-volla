@@ -40,7 +40,7 @@ class SolidButton extends StatelessWidget {
       child: ElevatedButton(
         style: ButtonStyle(
           padding: WidgetStatePropertyAll(
-            padding ?? EdgeInsets.symmetric(vertical: 22),
+            padding ?? EdgeInsets.symmetric(vertical: 16),
           ),
           splashFactory: InkRipple.splashFactory,
           overlayColor: WidgetStatePropertyAll(

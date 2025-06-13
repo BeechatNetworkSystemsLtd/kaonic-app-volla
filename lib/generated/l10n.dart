@@ -340,10 +340,10 @@ class S {
     );
   }
 
-  /// `Vola Messenger`
+  /// `Volla Messenger`
   String get volaMessenger {
     return Intl.message(
-      'Vola Messenger',
+      'Volla Messenger',
       name: 'volaMessenger',
       desc: '',
       args: [],

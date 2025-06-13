@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kaonic/routes.dart';
 import 'package:kaonic/src/login/bloc/login_bloc.dart';
 import 'package:kaonic/src/widgets/back_button.dart';
+import 'package:kaonic/src/widgets/custom_appbar.dart';
 import 'package:kaonic/src/widgets/main_text_field.dart';
 import 'package:kaonic/src/widgets/solid_button.dart';
 import 'package:kaonic/theme/text_styles.dart';
@@ -53,21 +54,21 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 24.h + MediaQuery.of(context).padding.top,
               ),
-              AppBackButton(label: S.of(context).login),
+              // AppBackButton(label: S.of(context).login),
+              CustomAppbar(title: S.of(context).login),
               Flexible(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           '${S.of(context).username}:',
                           style:
                               TextStyles.text20.copyWith(color: Colors.white),
                         ),
-                        const SizedBox(
-                          height: 32,
-                        ),
+                        const SizedBox(height: 10),
                         SizedBox(
                             width: MediaQuery.of(context).size.width * 0.85,
                             child: MainTextField(

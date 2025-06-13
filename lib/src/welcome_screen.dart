@@ -64,97 +64,51 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.dark,
-      body: Stack(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Image.asset(
-          //   Assets.welcomeBg,
-          //   width: MediaQuery.of(context).size.width,
-          //   height: MediaQuery.of(context).size.height,
-          //   fit: BoxFit.cover,
-          // ),
-          Align(
-            child: Padding(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).size.height * 0.2),
-              child: Image.asset(
+          Spacer(flex: 2),
+          Column(
+            spacing: 10,
+            children: [
+              Image.asset(
                 Assets.favicon,
                 width: 50,
               ),
-            ),
-          ),
-          Align(
-            child: Padding(
-              padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).size.height * 0.08,
-              ),
-              child: Text(
+              Text(
                 S.of(context).volaMessenger,
                 textAlign: TextAlign.center,
                 style: TextStyles.text20Bold.copyWith(color: AppColors.white),
               ),
+            ],
+          ),
+          Spacer(flex: 3),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SolidButton(
+                  textButton: S.of(context).login,
+                  onTap: () {
+                    if (!_enabled) return;
+
+                    Navigator.of(context).pushNamed(Routes.login);
+                  },
+                ),
+                const SizedBox(height: 20),
+                SolidButton(
+                  textButton: S.of(context).signUp,
+                  onTap: () {
+                    if (!_enabled) return;
+
+                    Navigator.of(context).pushNamed(Routes.signUp);
+                  },
+                ),
+              ],
             ),
           ),
-          Positioned(
-            bottom: MediaQuery.of(context).size.height * 0.3,
-            left: 0,
-            right: 0,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SolidButton(
-                    textButton: S.of(context).login,
-                    onTap: () {
-                      if (!_enabled) return;
-
-                      Navigator.of(context).pushNamed(Routes.login);
-                    },
-                  ),
-                  // MainButton(
-                  //   label: S.of(context).login,
-                  //   onPressed: !_enabled
-                  //       ? null
-                  //       : () => Navigator.of(context).pushNamed(Routes.login),
-                  // ),
-                  const SizedBox(height: 20),
-                  SolidButton(
-                    textButton: S.of(context).signUp,
-                    onTap: () {
-                      if (!_enabled) return;
-
-                      Navigator.of(context).pushNamed(Routes.signUp);
-                    },
-                  ),
-                  // MainButton(
-                  //   label: S.of(context).signUp,
-                  //   onPressed: !_enabled
-                  //       ? null
-                  //       : () => Navigator.of(context).pushNamed(Routes.signUp),
-                  // ),
-                ],
-              ),
-            ),
-          ),
-          // Positioned(
-          //   bottom: MediaQuery.of(context).size.height * 0.2,
-          //   child: SizedBox(
-          //     width: 1.sw,
-          //     child: Column(
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       children: [
-          //         Text(
-          //           S.of(context).securedBy,
-          //           style: TextStyles.text16.copyWith(color: AppColors.grey5),
-          //         ),
-          //         Image.asset(
-          //           Assets.holochainWhite,
-          //           width: 200,
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
+          Spacer(),
         ],
       ),
     );

@@ -5,6 +5,7 @@ import 'package:kaonic/data/models/settings.dart';
 import 'package:kaonic/generated/l10n.dart';
 import 'package:kaonic/service/kaonic_communication_service.dart';
 import 'package:kaonic/src/settings/bloc/settings_bloc.dart';
+import 'package:kaonic/src/widgets/custom_appbar.dart';
 import 'package:kaonic/src/widgets/main_button.dart';
 import 'package:kaonic/src/widgets/main_text_field.dart';
 import 'package:kaonic/src/widgets/radio_button.dart';
@@ -21,8 +22,8 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   final _frequencyController =
       TextEditingController(text: KaonicCommunicationService.defaultFrequency);
-  final _spacingController =
-      TextEditingController(text: KaonicCommunicationService.defaultChannelSpacing);
+  final _spacingController = TextEditingController(
+      text: KaonicCommunicationService.defaultChannelSpacing);
   final _txPowerController =
       TextEditingController(text: KaonicCommunicationService.defaultTxPower);
 
@@ -43,7 +44,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _appBar(),
+                      // _appBar(),
+                      CustomAppbar(title: S.of(context).settings),
                       SizedBox(height: 16),
                       Align(
                         child: Text(
@@ -240,22 +242,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ],
       );
 
-  Widget _appBar() => Row(
-        children: [
-          BackButton(
-            color: Colors.white,
-          ),
-          Expanded(
-            child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.w),
-                child: Align(
-                  child: Text(
-                    S.of(context).settings,
-                    textAlign: TextAlign.center,
-                    style: TextStyles.text24.copyWith(color: Colors.white),
-                  ),
-                )),
-          ),
-        ],
-      );
+  // Widget _appBar() => Row(
+  //       children: [
+  //         BackButton(
+  //           color: Colors.white,
+  //         ),
+  //         Expanded(
+  //           child: Padding(
+  //               padding: EdgeInsets.symmetric(horizontal: 10.w),
+  //               child: Align(
+  //                 child: Text(
+  //                   S.of(context).settings,
+  //                   textAlign: TextAlign.center,
+  //                   style: TextStyles.text24.copyWith(color: Colors.white),
+  //                 ),
+  //               )),
+  //         ),
+  //       ],
+  //     );
 }

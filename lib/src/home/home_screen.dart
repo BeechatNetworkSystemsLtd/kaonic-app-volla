@@ -61,7 +61,12 @@ class HomeScreen extends StatelessWidget {
                           Navigator.of(context).pushNamed(Routes.findNearby);
                         }),
                     SizedBox(width: 10.w),
-                    CircleButton(icon: Assets.iconSettings, onTap: () {})
+                    CircleButton(
+                      icon: Assets.iconSettings,
+                      onTap: () {
+                        Navigator.of(context).pushNamed(Routes.settings);
+                      },
+                    ),
                   ],
                 ),
                 SizedBox(height: 20.h),
@@ -105,25 +110,26 @@ class HomeScreen extends StatelessWidget {
                               when state.user != null &&
                                   state.user!.contacts.isNotEmpty =>
                             ListView.separated(
-                                padding: EdgeInsets.zero,
-                                itemBuilder: (context, index) => ContactItem(
-                                    onTap: () {
-                                      Navigator.of(context).pushNamed(
-                                        Routes.chat,
-                                        arguments:
-                                            state.user!.contacts[index].address,
-                                      );
-                                    },
-                                    onIdentifyTap: () {},
-                                    contact: state.user!.contacts[index],
-                                    nearbyFound: state.nodes.contains(
-                                        state.user!.contacts[index].address),
-                                    unreadCount: state.unreadMessages[
-                                        state.user!.contacts[index].address]),
-                                separatorBuilder: (context, index) => SizedBox(
-                                      height: 4.h,
-                                    ),
-                                itemCount: state.user!.contacts.length),
+                              padding: EdgeInsets.zero,
+                              itemBuilder: (context, index) => ContactItem(
+                                onTap: () {
+                                  Navigator.of(context).pushNamed(
+                                    Routes.chat,
+                                    arguments:
+                                        state.user!.contacts[index].address,
+                                  );
+                                },
+                                onIdentifyTap: () {},
+                                contact: state.user!.contacts[index],
+                                nearbyFound: state.nodes.contains(
+                                    state.user!.contacts[index].address),
+                                unreadCount: state.unreadMessages[
+                                    state.user!.contacts[index].address],
+                              ),
+                              separatorBuilder: (_, __) =>
+                                  SizedBox(height: 18.h),
+                              itemCount: state.user!.contacts.length,
+                            ),
                           _ => const SizedBox(),
                         },
                       );

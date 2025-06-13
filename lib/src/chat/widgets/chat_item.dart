@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kaonic/data/models/kaonic_message_event.dart';
 import 'package:kaonic/data/extensions/date_extension.dart';
 import 'package:kaonic/generated/l10n.dart';
+import 'package:kaonic/src/widgets/user_icon_widget.dart';
 import 'package:kaonic/theme/text_styles.dart';
 import 'package:kaonic/theme/theme.dart';
 import 'package:open_file/open_file.dart';
@@ -19,7 +20,7 @@ class ChatItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isMyMessage = message.address == peerAddress;
+    final bool isMyMessage = message.address != peerAddress;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 6.h),
       margin: EdgeInsets.only(
@@ -32,26 +33,36 @@ class ChatItem extends StatelessWidget {
             isMyMessage ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           Row(
+            spacing: 10.w,
             mainAxisAlignment:
                 isMyMessage ? MainAxisAlignment.end : MainAxisAlignment.start,
             children: [
               if (!isMyMessage) ...[
+                UserIconWidget(),
                 Text(
-                  S.of(context).username,
-                  style: TextStyles.text14
-                      .copyWith(color: AppColors.white.withValues(alpha: 0.5)),
+                  // S.of(context).username,
+                  '${peerAddress.substring(0, 4)}...',
+                  style: TextStyles.text18.copyWith(
+                    color: AppColors.white,
+                    fontWeight: FontWeight.w600,
+                    height: 1,
+                  ),
                 ),
-                SizedBox(width: 10.w),
               ],
               Text(
                 DateTime.fromMillisecondsSinceEpoch(message.timestamp)
                     .hMMFormat,
-                style: TextStyles.text14
-                    .copyWith(color: AppColors.white.withValues(alpha: 0.5)),
+                style: TextStyles.text14.copyWith(
+                  color: AppColors.white.withValues(alpha: 0.5),
+                  height: 1,
+                ),
               ),
             ],
           ),
-          _child(isMyMessage),
+          Padding(
+            padding: EdgeInsets.only(left: isMyMessage ? 0 : 48.w),
+            child: _child(isMyMessage),
+          ),
         ],
       ),
     );
