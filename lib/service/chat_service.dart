@@ -67,6 +67,10 @@ class ChatService {
     return chatId;
   }
 
+  Future<String> myAddress() async {
+    return await _kaonicService.myAddress();
+  }
+
   void sendTextMessage(String message, String address) async {
     _kaonicService.sendTextMessage(
         address, message, _contactChats[address] ?? "");

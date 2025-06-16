@@ -96,6 +96,10 @@ class KaonicCommunicationService {
     });
   }
 
+  Future<String> myAddress() async {
+    return await kaonicMethodChannel.invokeMethod('myAddress');
+  }
+
   void _listenKaonicEvents(dynamic event) {
     try {
       final eventJson = jsonDecode(event) as Map<String, dynamic>;

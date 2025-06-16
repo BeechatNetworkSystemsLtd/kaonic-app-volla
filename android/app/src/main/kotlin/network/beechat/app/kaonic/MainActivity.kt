@@ -93,6 +93,9 @@ class MainActivity : FlutterActivity() {
                         result.error("sendFileMessage", ex.message, "")
                     }
                 }
+                "myAddress" -> {
+                    result.success(KaonicService.myAddress)
+                }
 
                 "sendConfigure" -> {
                     try {

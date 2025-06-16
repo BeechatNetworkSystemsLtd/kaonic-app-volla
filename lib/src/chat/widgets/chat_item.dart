@@ -2,7 +2,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:kaonic/data/models/kaonic_message_event.dart';
 import 'package:kaonic/data/extensions/date_extension.dart';
-import 'package:kaonic/generated/l10n.dart';
 import 'package:kaonic/src/widgets/user_icon_widget.dart';
 import 'package:kaonic/theme/text_styles.dart';
 import 'package:kaonic/theme/theme.dart';
@@ -13,14 +12,16 @@ class ChatItem extends StatelessWidget {
     super.key,
     required this.message,
     required this.peerAddress,
+    required this.myAddress,
   });
 
   final MessageEvent message;
   final String peerAddress;
+  final String myAddress;
 
   @override
   Widget build(BuildContext context) {
-    final bool isMyMessage = message.address != peerAddress;
+    final bool isMyMessage = message.address == '1234567890';
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 6.h),
       margin: EdgeInsets.only(

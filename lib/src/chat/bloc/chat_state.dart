@@ -4,23 +4,26 @@ part of 'chat_bloc.dart';
 final class ChatState {
   const ChatState({
     required this.address,
+    this.myAddress = '',
     this.messages = const [],
     this.flagScrollToDown = false,
   });
 
   final List<KaonicEvent<KaonicEventData>> messages;
   final String address;
-
+  final String myAddress;
   final bool flagScrollToDown;
 
   ChatState copyWith({
     List<KaonicEvent<KaonicEventData>>? messages,
     bool flagScrollToDown = false,
+    String? myAddress,
   }) =>
       ChatState(
         address: address,
         flagScrollToDown: flagScrollToDown,
         messages: messages ?? this.messages,
+        myAddress: myAddress ?? this.myAddress,
       );
 }
 

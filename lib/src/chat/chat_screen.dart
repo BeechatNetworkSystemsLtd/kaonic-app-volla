@@ -114,6 +114,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 controller: _scrollController,
                                 padding: EdgeInsets.zero,
                                 itemBuilder: (context, index) => ChatItem(
+                                      myAddress: state.myAddress,
                                       message: state.messages[index].data
                                           as MessageEvent,
                                       peerAddress: widget.address,
