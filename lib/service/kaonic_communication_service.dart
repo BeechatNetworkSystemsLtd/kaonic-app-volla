@@ -11,9 +11,9 @@ import 'package:rxdart/subjects.dart';
 import 'package:uuid/uuid.dart';
 
 class KaonicCommunicationService {
-  static const defaultFrequency = "100";
-  static const defaultChannelSpacing = "100";
-  static const defaultTxPower = "100";
+  static const defaultFrequency = "869535";
+  static const defaultChannelSpacing = "200";
+  static const defaultTxPower = "10";
   final kaonicMethodChannel =
       MethodChannel('network.beechat.app.kaonic/kaonic');
   final kaonicEventChannel =
